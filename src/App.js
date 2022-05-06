@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Meal from "./components/Meal/Meal";
+import Meals from "./components/Meals/Meals";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const activeStyle = {
+    color: "orange",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <nav className="appNavBar navbar bg-primary">
+        <li>
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/"
+          >
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/meal"
+          >
+            meal details
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            to="/meals"
+          >
+            meals
+          </NavLink>
+        </li>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/meal" element={<Meal></Meal>}></Route>
+        <Route path="/meals" element={<Meals></Meals>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
